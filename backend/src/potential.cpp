@@ -6,6 +6,7 @@
 
 #include "../include/define.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 float Bulk_Energy_Selinger_Pear(float ni[3], float nj[3], Parameters *params, float rij[3], int nk) {
   float nij, polar_splay;

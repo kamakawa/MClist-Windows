@@ -9,6 +9,7 @@
 #include "../include/define.h"
 #include "../include/monte_carlo.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 void apply_Initial_Condidions(float *ni, int *pt, Parameters params) {
   if (strcasecmp(params.ic, "random") == 0) {

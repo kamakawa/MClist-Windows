@@ -7,6 +7,8 @@
 #include "../include/define.h"
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
+
 void random_ic(float *ni, int *pt, Parameters params);
 void homogeneous_ic(float *ni, int *pt, Parameters params);
 void cholesteric_ic(float *ni, int *pt, Parameters params);

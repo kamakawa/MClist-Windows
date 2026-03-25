@@ -13,6 +13,8 @@
 #include "../include/geometry.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
+
 #define MAX(a, b) (a > b ? a : b)
 Custom_Geometry::Custom_Geometry(int *pt, Parameters *params) : Geometry(params) {
   printf("Geometry: Custom\n");

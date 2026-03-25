@@ -4,6 +4,7 @@
 #include <fstream>
 #include "../include/define.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 int print_nbc(const char *fname, float *ni, float *bi, float *ci, Parameters params);
 int print_n(const char *fname, float *ni, Parameters params, int *pt);

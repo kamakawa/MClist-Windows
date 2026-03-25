@@ -10,6 +10,7 @@
 #include "../include/parameters.h"
 #include "../include/parameter_order.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 //~ __device__ float Bulk_latice_Potential_GPU(const nni fullni[8], Parameters *params);
 //~ __device__ float Slab_latice_Potential_GPU(const nni fullni[8], Parameters *params);
 //~ __device__ float Custom_latice_Potential_GPU(const nni fullni[8], Parameters *params);

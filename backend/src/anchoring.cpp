@@ -10,6 +10,7 @@
 
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 void Anchoring::check_parameter(bool std_val, std::string parameter_name) {
   if (std_val)

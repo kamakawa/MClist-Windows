@@ -6,6 +6,7 @@
 #include "../include/parameters.h"
 #include "../include/define.h"
 #include "../include/evolve.h"
+#include "../include/compat_windows.h"
 
 class EvolveNGPU: public Evolve{
 public:

@@ -12,6 +12,7 @@
 #include "../include/parameters.h"
 #include "../include/parameter_order.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 #include <cuda_runtime.h>
 #include <curand_kernel.h>
 #include <ctime>

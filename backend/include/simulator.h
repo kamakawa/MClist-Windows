@@ -2,6 +2,7 @@
 #define SIMULATOR_H_
 
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 class Evolve;
 

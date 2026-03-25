@@ -7,6 +7,7 @@
 
 #include "../include/define.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 float Eigen_value_evaluation(float *mat, float *vec) {
   static gsl_eigen_symmv_workspace *w = gsl_eigen_symmv_alloc(3);

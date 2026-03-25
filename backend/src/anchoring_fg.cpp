@@ -9,6 +9,8 @@
 #include "../include/anchoring.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
+
 FG_Anchoring::FG_Anchoring(Parameters *params, int id) {
   this->id = id;
   // Asserting anchoring energy is set and getting its value:

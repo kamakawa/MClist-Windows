@@ -11,6 +11,7 @@
 #include "../include/geometry.h"
 #include "../include/potential.h"
 #include "../include/io.h"
+#include "../include/compat_windows.h"
 
 simulator::simulator(Parameters *params_in)
     : params(params_in), Nx(params_in ? params_in->Nx : 0), Ny(params_in ? params_in->Ny : 0), Nz(params_in ? params_in->Nz : 0) {}

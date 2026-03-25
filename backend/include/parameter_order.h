@@ -7,6 +7,8 @@
 #include "../include/define.h"
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
+
 float Eigen_value_evaluation(float *mat, float *vec);
 void Matrice_constructor(float *ni, float *Q, int *pt, Parameters params);
 float V_Order_parameter_evaluation(float *mat_b, float *mat_c, float *vec_b, float *vec_c, float PoB);

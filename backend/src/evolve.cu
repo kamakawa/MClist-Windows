@@ -16,6 +16,7 @@
 #include "../include/parameter_order.h"
 #include "../include/potential.cuh"
 #include "../include/stringGPU.cuh"
+#include "../include/compat_windows.h"
 #include <cuda_runtime.h>
 #include <cooperative_groups.h>
 #include "../include/reduce.cuh"

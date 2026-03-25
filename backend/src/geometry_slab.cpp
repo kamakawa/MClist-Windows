@@ -12,6 +12,7 @@
 #include "../include/geometry.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 Slab_Geometry::Slab_Geometry(int *pt, Parameters *params) : Geometry(params) {
   printf("Geometry: Slab\n");

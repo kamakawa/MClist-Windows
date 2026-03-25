@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <cstring>
+#include "../include/compat_windows.h"
 
 #if defined(_WIN32)
   #include <direct.h>

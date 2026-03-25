@@ -12,6 +12,7 @@
 #include "../include/ic.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 int print_n(const char *fname, float *ni, Parameters params, int *pt) {
   int Nx = params.Nx;

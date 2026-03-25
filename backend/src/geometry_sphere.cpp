@@ -11,6 +11,7 @@
 #include "../include/geometry.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 Sphere_Geometry::Sphere_Geometry(int *pt, Parameters *params) : Geometry(params) {
   printf("Geometry: Sphere\n");

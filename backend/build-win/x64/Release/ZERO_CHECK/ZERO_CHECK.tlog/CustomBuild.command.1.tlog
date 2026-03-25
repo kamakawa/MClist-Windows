@@ -1,0 +1,10 @@
+^C:\DEV\MCLIST\BACKEND\BUILD-WIN\CMAKEFILES\6D3929F9DAA74FB548A891AC813040FC\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Dev/MClist/backend -BC:/Dev/MClist/backend/build-win --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Dev/MClist/backend/build-win/MClist.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

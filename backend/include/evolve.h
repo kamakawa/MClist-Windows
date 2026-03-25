@@ -6,7 +6,10 @@
 #include "../include/geometry.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 #ifdef CUDA__
+
+inline void setNni(unsigned int pos, int conditional, nni *nLocal, float *ni, int *pt);
 // #pragma message ( "Cuda Compilation" )
 #include <cuda_runtime.h>
 #include <curand_kernel.h>

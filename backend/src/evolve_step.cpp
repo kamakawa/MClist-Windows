@@ -12,6 +12,7 @@
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 stepEvolveN::stepEvolveN(float *ni, int *ppt, Parameters *params)
     : Nx(params->Nx), Ny(params->Ny), Nz(params->Nz), EvolveN(ni, ppt, params) {

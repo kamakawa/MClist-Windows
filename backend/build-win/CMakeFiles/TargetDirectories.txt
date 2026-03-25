@@ -1,0 +1,4 @@
+C:/Dev/MClist/backend/build-win/CMakeFiles/mc_sim_cpu.dir
+C:/Dev/MClist/backend/build-win/CMakeFiles/mc_sim.dir
+C:/Dev/MClist/backend/build-win/CMakeFiles/ALL_BUILD.dir
+C:/Dev/MClist/backend/build-win/CMakeFiles/ZERO_CHECK.dir

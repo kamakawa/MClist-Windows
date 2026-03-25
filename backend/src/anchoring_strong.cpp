@@ -9,6 +9,7 @@
 #include "../include/anchoring.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 Strong_Anchoring::Strong_Anchoring(Parameters *params, int id) {
   this->id = id;

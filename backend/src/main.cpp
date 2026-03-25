@@ -20,6 +20,7 @@
 #include "../include/parameters.h"
 #include "../include/potential.h"
 #include "../include/simulator.h"
+#include "../include/compat_windows.h"
 
 #define MCLICS_VERSION "0.1"
 

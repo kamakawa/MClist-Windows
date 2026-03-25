@@ -49,6 +49,7 @@ target_include_directories(mc_sim_cpu PRIVATE include)
 target_link_libraries(mc_sim_cpu PRIVATE GSL::gsl GSL::gslcblas OpenMP::OpenMP_CXX)
 
 if(MCLIST_BUILD_GPU)
+  set(CMAKE_CUDA_COMPILER "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.2/bin/nvcc.exe")
   enable_language(CUDA)
   set(CMAKE_CUDA_STANDARD 17)
   set(CMAKE_CUDA_STANDARD_REQUIRED ON)
@@ -71,7 +72,7 @@ if(MCLIST_BUILD_GPU)
   target_compile_definitions(mc_sim PRIVATE CUDA__="CUDA")
   set_target_properties(mc_sim PROPERTIES
     CUDA_SEPARABLE_COMPILATION ON
-    CUDA_ARCHITECTURES native
+    CUDA_ARCHITECTURES 86
   )
   target_link_libraries(mc_sim PRIVATE GSL::gsl GSL::gslcblas OpenMP::OpenMP_CXX)
 endif()

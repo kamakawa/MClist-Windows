@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../include/parameters.h"
 #include "../include/define.h"
+#include "../include/compat_windows.h"
 
 __device__ float Bulk_Energy_Selinger_Pear_GPU(float ni[3], float nj[3], Parameters *params, float rij[3], int nk =1);
 __device__ float Bulk_Energy_Lebwohl_Lasher_GPU(float ni[3], float nj[3], Parameters *params, float rij[3], int nk =1);

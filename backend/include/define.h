@@ -2,6 +2,7 @@
 #define DEFINE_H_
 
 #include "../include/parameters.h"
+#include "../include/compat_windows.h"
 
 #define njx(i, j, k) nj[(i + Nx * (j + Ny * k)) * 3 + 0]
 #define njy(i, j, k) nj[(i + Nx * (j + Ny * k)) * 3 + 1]

@@ -12,6 +12,7 @@
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 class Geometry {
  public:

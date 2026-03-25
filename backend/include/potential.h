@@ -5,6 +5,7 @@
 #include "../include/define.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
 
 float Bulk_Energy_Selinger_BC(float nix, float niy, float niz, float bix, float biy, float biz, float *ni, float *bi, int i, int j, int k, Parameters params, int *pt, int[3], int nk = 1);
 float nPotential(float nix, float niy, float niz, float *ni, int i, int j, int k, Parameters params, int *pt, float bulk_pot(float nix, float niy, float niz, float *ni, int i, int j, int k, Parameters params, int *pt, float rij[3]));

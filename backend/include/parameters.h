@@ -1,6 +1,7 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 #include <gsl/gsl_rng.h>
+#include "../include/compat_windows.h"
 
 #include <map>
 #include <string>

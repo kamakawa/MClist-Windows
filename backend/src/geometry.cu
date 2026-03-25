@@ -8,6 +8,7 @@
 #include "../include/geometry.h"
 #include "../include/parameters.h"
 #include "../include/potential.cuh"
+#include "../include/compat_windows.h"
 
 #include <map>
 __device__ extern float (*bulk_potentialGPU)(float ni[3], float nj[3], Parameters *params, float rij[3], int nk);

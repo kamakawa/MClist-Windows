@@ -14,6 +14,10 @@
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
+#include "../include/compat_windows.h"
+
+inline void setNni(unsigned int pos, int conditional, nni *nLocal, float *ni, int *pt);
+
 void inline setNni(uint pos, int conditional, nni *nLocal, float *ni, int *pt) {
   if (conditional == 1) {
     nLocal->x = ni[pos * 3 + 0];
@@ -36,7 +40,7 @@ float EvolveN::energy_calculator() {
   }
 
   double Etot = 0;
-#pragma omp parallel for simd reduction(+ : Etot) schedule(simd : dynamic) num_threads(omp_get_max_threads())
+#pragma omp parallel for reduction(+ : Etot) schedule(simd : dynamic) num_threads(omp_get_max_threads())
   for (int idx = 0; idx < Nt; idx++) {
     nni nLocal[28];
 
@@ -136,7 +140,7 @@ void EvolveN::Monte_Carlo_Step(float &ang_var, gsl_rng **r) {
     myNi[i] = ni[i];
 #pragma omp parallel num_threads(omp_get_max_threads())
   for (int tick = 0; tick < 8; tick++) {
-#pragma omp for simd reduction(+ : acceptance) schedule(simd : dynamic)
+#pragma omp for reduction(+ : acceptance) schedule(simd : dynamic)
     for (int nt = 0; nt < Ntt; nt++) {
       float E_new, E_old, rotation_type, va, ranVal;
       int i, j, k;
