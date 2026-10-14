@@ -217,7 +217,7 @@ export default function Results() {
         if (res?.ok && res?.imagePath) {
           const relativePath = res.imagePath
             .replace(workdir, "")
-            .replace(/^\/+/, "");
+            .replace(/^[\\/]+/, "");
 
           const imgRes = await api.readRunFile(
             workdir,

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "./Icons.jsx";
+import Flag from "./Flag.jsx";
 
 export default function Select({
   value,
@@ -104,7 +105,8 @@ export default function Select({
         }}
       >
         <span style={{ ...cs.triggerText, ...(!current || current.value === "" ? cs.triggerPlaceholder : null) }}>
-          {current ? current.label : placeholder || ""}
+          {current?.flag ? <Flag code={current.flag} /> : null}
+          <span>{current ? current.label : placeholder || ""}</span>
         </span>
         <span style={{ ...cs.chevron, transform: open ? "rotate(180deg)" : "rotate(0deg)" }}>
           <ChevronDownIcon />
@@ -130,6 +132,7 @@ export default function Select({
               }}
             >
               <span style={cs.optionDot}>{idx === selectedIndex ? <DotIcon /> : null}</span>
+              {opt.flag ? <Flag code={opt.flag} /> : null}
               <span>{opt.label}</span>
             </div>
           ))}
@@ -232,6 +235,9 @@ const cs = {
     cursor: "not-allowed",
   },
   triggerText: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",

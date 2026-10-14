@@ -251,7 +251,7 @@ export default function Running() {
 
         if (res?.ok && res?.imagePath) {
           try {
-            const relativePath = res.imagePath.replace(meta.workdir, "").replace(/^\/+/, "");
+            const relativePath = res.imagePath.replace(meta.workdir, "").replace(/^[\\/]+/, "");
 
             const imgRes = await api.readRunFile(
               meta.workdir,

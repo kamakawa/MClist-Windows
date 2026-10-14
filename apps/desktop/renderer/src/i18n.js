@@ -1,10 +1,10 @@
 export const LANG_OPTIONS = [
-  { value: "en", label: "🇺🇸 EN" },
-  { value: "pt-BR", label: "🇧🇷 PT-BR" },
-  { value: "es", label: "🇪🇸 ES" },
-  { value: "fr", label: "🇫🇷 FR" },
-  { value: "ja", label: "🇯🇵 日本語" },
-  { value: "zh", label: "🇨🇳 中文" },
+  { value: "en", label: "EN", flag: "us" },
+  { value: "pt-BR", label: "PT-BR", flag: "br" },
+  { value: "es", label: "ES", flag: "es" },
+  { value: "fr", label: "FR", flag: "fr" },
+  { value: "ja", label: "日本語", flag: "jp" },
+  { value: "zh", label: "中文", flag: "cn" },
 ];
 
 const LANG_ALIASES = {

@@ -38,6 +38,9 @@
   --font: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --glass-blur: 10px;
   --grid-dot: rgba(29,29,29,0.05);
+
+  --scroll-thumb: rgba(29,29,29,0.22);
+  --scroll-thumb-hover: rgba(230,57,70,0.75);
 }
 
 html[data-theme="dark"]{
@@ -75,4 +78,7 @@ html[data-theme="dark"]{
 
   --glass-blur: 12px;
   --grid-dot: rgba(255,255,255,0.05);
+
+  --scroll-thumb: rgba(255,255,255,0.22);
+  --scroll-thumb-hover: rgba(230,57,70,0.85);
 }
