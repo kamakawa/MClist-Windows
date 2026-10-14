@@ -14,7 +14,7 @@
 #include "../include/parameter_order.h"
 #include "../include/parameters.h"
 #include "../include/potential.h"
-void inline setNni(uint pos, int conditional, nni *nLocal, float *ni, int *pt) {
+void inline setNni(unsigned int pos, int conditional, nni *nLocal, float *ni, int *pt) {
   if (conditional == 1) {
     nLocal->x = ni[pos * 3 + 0];
     nLocal->y = ni[pos * 3 + 1];

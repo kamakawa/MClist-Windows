@@ -12,7 +12,7 @@ para simular, explorar e entender sistemas de cristais líquidos nemáticos.
 
 [![Desenvolvido por Eric Kamakawa](https://img.shields.io/badge/Desenvolvido_por-Eric_Kamakawa-e63946?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kamakawa)
 
-[![Platform](https://img.shields.io/badge/plataforma-Linux-4a3aa7?style=flat-square&logo=linux&logoColor=white)](#-como-rodar-localmente)
+[![Platform](https://img.shields.io/badge/plataforma-Linux_|_Windows-4a3aa7?style=flat-square&logo=linux&logoColor=white)](#-como-rodar-localmente)
 [![GPU](https://img.shields.io/badge/GPU-CUDA-76B900?style=flat-square&logo=nvidia&logoColor=white)](#-tecnologias)
 [![Languages](https://img.shields.io/badge/idiomas-6-e63946?style=flat-square)](#-internacionalização)
 [![Made with React](https://img.shields.io/badge/renderer-React_19-149ECA?style=flat-square&logo=react&logoColor=white)](#-tecnologias)
@@ -143,12 +143,19 @@ React Router · Three.js (WebGL) · CSS custom properties
 
 ## 🚀 Como rodar localmente
 
+O McLiCS roda em **Linux** (CPU e GPU) e em **Windows** (CPU). O mesmo Makefile detecta o sistema e
+gera os binários em `backend/dist/linux-x64/` ou `backend/dist/win-x64/`.
+
 ### Pré-requisitos
 
 - **Node.js** 20.19+ (ou 22.12+) — exigido pelo Vite 7
-- **g++** e **GNU Make**
-- **GSL** (`libgsl-dev`) e **OpenMP** — para o núcleo científico
-- **CUDA Toolkit** (`nvcc`) — opcional, só para o build de GPU; sem ele o Makefile cai para CPU automaticamente
+- **Python 3** com `numpy` e `matplotlib` — para as prévias 2D do campo diretor
+- **Linux:** `g++`, **GNU Make**, **GSL** (`libgsl-dev`) e **OpenMP**
+- **Windows:** [MSYS2](https://www.msys2.org/) instalado em `C:\msys64` (ou defina `MSYS2_ROOT`), com os pacotes:
+  ```bash
+  pacman -S make mingw-w64-x86_64-gcc mingw-w64-x86_64-gsl
+  ```
+- **CUDA Toolkit** (`nvcc`) — opcional, só para o build de GPU no Linux; sem ele o Makefile cai para CPU automaticamente
 
 ### Passo a passo
 
@@ -174,9 +181,14 @@ npm install
 npm start
 ```
 
-Em modo de desenvolvimento, cada execução recompila o backend automaticamente antes de rodar. Para
-gerar um instalável (`.AppImage`/`.deb`), veja os scripts `dist:linux` e `dist:dir` em
-`apps/desktop/main/package.json`.
+Em modo de desenvolvimento, cada execução recompila o backend automaticamente antes de rodar (no
+Windows, usando o `make` e o `g++` do MSYS2). Para gerar um instalável, veja os scripts `dist:linux`
+(`.AppImage`/`.deb`), `dist:win` (instalador `.exe`) e `dist:dir` em `apps/desktop/main/package.json`.
+O build de cada sistema precisa ser feito no próprio sistema.
+
+> **Windows:** por enquanto só o modo **CPU** está disponível — o botão de GPU fica desativado. No
+> Windows o `nvcc` exige o compilador da Microsoft (MSVC), que não é compatível com o g++ usado no
+> restante do núcleo.
 
 <br>
 

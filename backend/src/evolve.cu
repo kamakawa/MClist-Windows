@@ -45,7 +45,7 @@ __device__ int (*zBoundary_GPU)(int &ii, int NN);
 __device__ float *d_ns, *d_phi_s, *d_theta_s, *d_W;
 __device__ float (*latice_Potential_GPU)(const nni fullni[20], Parameters *params);
 __device__ p_Surface_Potential *d_Surface_Potential_GPU; 
-__device__ void setNni(uint pos, int conditional , nni *nLocal, float *ni, int *pt) {
+__device__ void setNni(unsigned int pos, int conditional , nni *nLocal, float *ni, int *pt) {
   if(conditional==1) {
     nLocal->x =ni[pos*3+0];
     nLocal->y =ni[pos*3+1];

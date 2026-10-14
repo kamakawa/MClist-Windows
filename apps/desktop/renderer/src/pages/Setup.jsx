@@ -7,6 +7,8 @@ import { ChevronLeftIcon } from "../components/Icons.jsx";
 import Select from "../components/Select.jsx";
 
 const api = window.mclics;
+// O build de GPU (CUDA) ainda não está disponível no Windows
+const gpuSupported = api?.platform !== "win32";
 
 const SELECT_OPTIONS = {
   potential: ["ll", "ghrl", "pear"],
@@ -609,6 +611,11 @@ export default function Setup() {
           <div style={s.footerLeft}>
             <div style={s.footerTitle}>{t("runSimulation")}</div>
             <div style={s.footerSub}>{t("runSimulationSub")}</div>
+            {!gpuSupported ? (
+              <div style={s.gpuNotice} role="status">
+                ⚠ {t("gpuUnavailableWindows")}
+              </div>
+            ) : null}
           </div>
 
           <div style={s.runActions}>
@@ -641,7 +648,8 @@ export default function Setup() {
               onMouseEnter={() => setHoverGPU(true)}
               onMouseLeave={() => setHoverGPU(false)}
               onClick={() => run("gpu")}
-              disabled={!validation.ok}
+              disabled={!validation.ok || !gpuSupported}
+              title={gpuSupported ? undefined : t("gpuUnavailableWindows")}
             >
               {t("runGPU")}
             </button>
@@ -1350,6 +1358,16 @@ const s = {
   footerLeft: { display: "grid", gap: 3 },
   footerTitle: { fontWeight: 950 },
   footerSub: { fontSize: 12, color: "var(--muted)", fontWeight: 700 },
+  gpuNotice: {
+    marginTop: 8,
+    padding: "8px 12px",
+    borderRadius: 10,
+    fontSize: 12,
+    fontWeight: 800,
+    color: "#b45309",
+    background: "rgba(245,158,11,0.14)",
+    border: "1px solid rgba(245,158,11,0.45)",
+  },
   runActions: { display: "flex", gap: 10, flexWrap: "wrap" },
   runCPU: {
     border: "1px solid var(--border-color)",

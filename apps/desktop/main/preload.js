@@ -1,6 +1,8 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("mclics", {
+  platform: process.platform,
+
   // recents + files
   getRecents: () => ipcRenderer.invoke("get-recents"),
   openParamFile: () => ipcRenderer.invoke("open-param-file"),

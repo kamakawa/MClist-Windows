@@ -19,6 +19,7 @@
     "prepare:packaged-assets": "node ./scripts/prepare-packaged-assets.js",
 
     "dist:linux": "npm run build:renderer && npm run prepare:packaged-assets && electron-builder --linux AppImage deb",
+    "dist:win": "npm run build:renderer && npm run prepare:packaged-assets && electron-builder --win nsis",
     "dist:dir": "npm run build:renderer && npm run prepare:packaged-assets && electron-builder --dir",
 
     "pack": "npm run dist:linux"
@@ -56,8 +57,8 @@
         "filter": ["**/*"]
       },
       {
-        "from": "resources/backend",
-        "to": "backend",
+        "from": "resources/backend/${os}-x64",
+        "to": "backend/${os}-x64",
         "filter": ["**/*"]
       },
       {
@@ -80,6 +81,17 @@
       "icon": "build",
       "maintainer": "Eric Kamakawa <erickamakawa@gmail.com>",
       "artifactName": "McLiCS-${version}-${arch}.${ext}"
+    },
+
+    "win": {
+      "target": ["nsis"],
+      "icon": "build/icon.png",
+      "artifactName": "McLiCS-${version}-${arch}-setup.${ext}"
+    },
+
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }

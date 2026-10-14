@@ -1,7 +1,7 @@
 
 #include<iostream>
-__global__ void reduce_sum(uint *g_idata, uint *g_odata, int max) {
-  extern __shared__ uint sdata[];
+__global__ void reduce_sum(unsigned int *g_idata, unsigned int *g_odata, int max) {
+  extern __shared__ unsigned int sdata[];
   // each thread loads one element from global to shared mem
   unsigned int tid = threadIdx.x;
   unsigned int i = blockIdx.x*(blockDim.x) + threadIdx.x;

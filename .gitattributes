@@ -1,0 +1,3 @@
+# Makefile e scripts shell precisam de LF para funcionar no Linux/WSL
+Makefile text eol=lf
+*.sh text eol=lf

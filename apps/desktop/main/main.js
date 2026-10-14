@@ -68,12 +68,23 @@ function projectRoot() {
   return path.resolve(__dirname, "..", "..", "..");
 }
 
-function devBackendDir() {
+const IS_WINDOWS = process.platform === "win32";
+
+// Mesmo nome de pasta que o Makefile usa em OUT_DIR (dist/$(PLATFORM))
+function backendPlatform() {
+  return IS_WINDOWS ? "win-x64" : "linux-x64";
+}
+
+function backendSourceDir() {
   return path.join(projectRoot(), "backend");
 }
 
+function devBackendDir() {
+  return path.join(backendSourceDir(), "dist", backendPlatform());
+}
+
 function packagedBackendDir() {
-  return path.join(process.resourcesPath, "backend", "linux-x64");
+  return path.join(process.resourcesPath, "backend", backendPlatform());
 }
 
 function backendDir() {
@@ -81,7 +92,34 @@ function backendDir() {
 }
 
 function backendBinaryName(mode) {
-  return mode === "cpu" ? "mc_sim_cpu" : "mc_sim";
+  const name = mode === "cpu" ? "mc_sim_cpu" : "mc_sim";
+  return IS_WINDOWS ? `${name}.exe` : name;
+}
+
+// No Windows o backend é compilado com o make/g++ do MSYS2 (MinGW64)
+function msys2Root() {
+  return process.env.MSYS2_ROOT || "C:\\msys64";
+}
+
+function makeCommand() {
+  if (!IS_WINDOWS) {
+    return { cmd: "make", env: process.env };
+  }
+
+  const root = msys2Root();
+  const cmd = path.join(root, "usr", "bin", "make.exe");
+  const toolPath = [path.join(root, "mingw64", "bin"), path.join(root, "usr", "bin")];
+
+  return {
+    cmd,
+    env: {
+      ...process.env,
+      PATH: [...toolPath, process.env.PATH || ""].join(path.delimiter),
+    },
+    missing: !fs.existsSync(cmd)
+      ? `MSYS2 não encontrado em ${root}. Instale o MSYS2 (com mingw-w64-x86_64-gcc, mingw-w64-x86_64-gsl e make) ou defina MSYS2_ROOT.`
+      : "",
+  };
 }
 
 function runsBaseDir() {
@@ -107,7 +145,8 @@ function safeInsideReal(parent, child) {
 }
 
 function pythonExec() {
-  return process.env.PYTHON || "python3";
+  // No Windows o executável "python3" geralmente não existe; o launcher "py" sim
+  return process.env.PYTHON || (IS_WINDOWS ? "py" : "python3");
 }
 
 function previewCacheDir(workdir) {
@@ -407,7 +446,10 @@ ipcMain.handle("read-run-file", async (_e, { workdir, relPath, maxBytes = 2_000_
     );
   }
 
-  const abs = path.resolve(workdir, relPath);
+  // A UI pode mandar caminhos com "/" ou "\" no início (ex.: "\.mclics_previews\x.png"
+  // no Windows); sem isso o path.resolve trataria o valor como raiz do disco.
+  const cleanRel = String(relPath).replace(/^[\\/]+/, "");
+  const abs = path.resolve(workdir, cleanRel);
 
   if (!safeInsideReal(workdir, abs)) {
     throw new Error(`Invalid file path.\nworkdir=${workdir}\nabs=${abs}`);
@@ -593,14 +635,27 @@ ipcMain.handle("run-sim", async (_event, { mode, paramText }) => {
   };
 
   try {
+    if (IS_WINDOWS && mode !== "cpu") {
+      const msg = "O modo GPU ainda não é suportado no Windows. Use o modo CPU.";
+      finishRun({ code: -1, error: msg, stage: "platform" });
+      throw new Error(msg);
+    }
+
     if (!app.isPackaged) {
       console.log("===== COMPILING BACKEND (DEV MODE) =====");
       console.log("Mode:", mode);
       console.log("Backend:", backend);
 
+      const make = makeCommand();
+      if (make.missing) {
+        finishRun({ code: -1, error: make.missing, stage: "compile" });
+        throw new Error(make.missing);
+      }
+
       const makeArgs = mode === "cpu" ? ["CPU"] : [];
-      const compile = spawnSync("make", makeArgs, {
-        cwd: backend,
+      const compile = spawnSync(make.cmd, makeArgs, {
+        cwd: backendSourceDir(),
+        env: make.env,
         encoding: "utf8",
       });
 

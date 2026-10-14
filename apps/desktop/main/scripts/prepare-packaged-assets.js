@@ -4,13 +4,18 @@ const path = require("path");
 const mainDir = path.resolve(__dirname, "..");
 const repoRoot = path.resolve(mainDir, "..", "..", "..");
 
+// Mesmo nome de pasta que o Makefile usa em OUT_DIR (dist/$(PLATFORM))
+const isWindows = process.platform === "win32";
+const platform = isWindows ? "win-x64" : "linux-x64";
+const exe = isWindows ? ".exe" : "";
+
 // ===== ORIGENS =====
 const rendererDist = path.join(repoRoot, "apps", "desktop", "renderer", "dist");
-const backendSource = path.join(repoRoot, "backend", "dist", "linux-x64");
+const backendSource = path.join(repoRoot, "backend", "dist", platform);
 
 // ===== DESTINOS =====
 const outRenderer = path.join(mainDir, "resources", "renderer-dist");
-const outBackend = path.join(mainDir, "resources", "backend", "linux-x64");
+const outBackend = path.join(mainDir, "resources", "backend", platform);
 const outScripts = path.join(mainDir, "resources", "scripts");
 
 // ===== HELPERS =====
@@ -69,11 +74,12 @@ function main() {
   assertExists(path.join(outRenderer, "index.html"), "renderer index.html");
 
   // valida backend
-  const cpuBin = path.join(outBackend, "mc_sim_cpu");
-  const gpuBin = path.join(outBackend, "mc_sim");
+  const cpuBin = path.join(outBackend, `mc_sim_cpu${exe}`);
+  const gpuBin = path.join(outBackend, `mc_sim${exe}`);
 
   assertExists(cpuBin, "CPU backend binary");
-  assertExists(gpuBin, "GPU backend binary");
+  // No Windows só existe o build de CPU
+  if (!isWindows) assertExists(gpuBin, "GPU backend binary");
 
   // valida script python (não copia, só verifica!)
   const pyScript = path.join(outScripts, "render_director_preview.py");
